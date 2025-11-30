@@ -31,16 +31,14 @@
   <h2>Notre produit phare</h2>
   <div class="product-grid">
     <div class="product-card">
-      <img src="images/produit.jpg" alt="Bras Bionique BionicLife">
+      <img src="images/hero-arm.jpg" alt="Bras Bionique BionicLife">
       <h3>Produits Bionique BLX-01</h3>
       <p>Une précision chirurgicale, un confort incomparable.</p>
-      <div class="see-more-container">
+      <div class="button-group">
         <a href="boutique.php" class="btn">Voir la boutique</a>
       </div>
     </div>
   </div>
-  
-  
 </section>
 
 <!-- Reviews Section -->

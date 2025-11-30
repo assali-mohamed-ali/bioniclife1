@@ -125,7 +125,11 @@ $products = $stmt->fetchAll();
         <p><?= nl2br(htmlspecialchars($p['description'])) ?></p>
         <p style="font-weight:700; color:#1a1a1a;">Prix: <?= number_format($p['price'], 2) ?> TND</p>
         <div class="see-more-container">
-          <a href="payement.php?id=<?= (int)$p['id'] ?>" class="btn">Acheter</a>
+          <?php if (isset($_SESSION['user_id'])): ?>
+            <a href="payement.php?id=<?= (int)$p['id'] ?>" class="btn">Acheter</a>
+          <?php else: ?>
+            <a href="login.php?redirect=payement.php?id=<?= (int)$p['id'] ?>" class="btn">Acheter</a>
+          <?php endif; ?>
           <a href="#" class="btn-secondary">À propos</a>
         </div>
 

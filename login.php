@@ -9,6 +9,7 @@ if (isset($_SESSION['user_id'])) {
 }
 
 $message = '';
+$redirect = $_GET['redirect'] ?? 'index.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email    = trim($_POST['email']);
@@ -23,8 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_id']    = $user['id'];
         $_SESSION['user_name']  = $user['firstname'] . ' ' . $user['lastname'];
         $_SESSION['user_role']  = $user['role'];
-        // After successful login, redirect back to the public home page
-        header("Location: index.php");
+        // Rediriger vers la page demandée ou l'accueil
+        $redirect_to = $_POST['redirect'] ?? 'index.php';
+        header("Location: " . $redirect_to);
         exit;
     } else {
         $message = "Email ou mot de passe incorrect.";
@@ -58,7 +60,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="error"><?= htmlspecialchars($message) ?></div>
     <?php endif; ?>
 
+    <?php if (isset($_GET['redirect']) && strpos($_GET['redirect'], 'payement.php') !== false): ?>
+        <div class="message" style="background:#fff3cd;color:#856404;border:1px solid #ffeeba;">
+            Vous devez vous connecter pour acheter un produit.
+        </div>
+    <?php endif; ?>
+
     <form method="POST" class="auth-form">
+        <input type="hidden" name="redirect" value="<?= htmlspecialchars($redirect) ?>">
         <div class="form-group">
             <label>Email</label>
             <input type="email" name="email" required>

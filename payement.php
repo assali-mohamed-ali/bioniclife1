@@ -1,5 +1,18 @@
 <?php
 // payement.php — renamed from rendezvous.php
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user_id'])) {
+    // Sauvegarder l'URL de destination pour rediriger après connexion
+    $redirect_url = 'payement.php';
+    if (isset($_GET['id'])) {
+        $redirect_url .= '?id=' . intval($_GET['id']);
+    }
+    header('Location: login.php?redirect=' . urlencode($redirect_url));
+    exit;
+}
+
 include __DIR__ . '/config/header.php';
 require_once __DIR__ . '/config/db.php';
 
